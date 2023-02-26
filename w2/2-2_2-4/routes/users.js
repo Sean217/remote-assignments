@@ -68,23 +68,27 @@ router.post('/', async (req, res, _next) => {
         if (!nameValid) {
             return res.status(400).send({ error: 'Client Error Response' })
         }
+        console.log('?');
         //check for email validation
         let valid = isEmailValid(email)
         if (!valid) {
             return res.status(400).send({ error: 'Client Error Response' })
         }
+        console.log('??');
         //check for email duplication
         let dup = await db.getUserByEmail(email);
         console.log(dup);
         if (dup) {
             return res.status(403).send({ error: 'Email Already Exists' })
         }
+        console.log('???');
         //check for password validation
         let pwValid = await validatePassword(password)
         //console.log(pwValid);
         if (pwValid === false) {
             return res.status(400).send({ error: 'Client Error Response' })
         }
+        console.log('????');
         //insert new uesr to the db
         console.log(name, email, password);
         const userId = await db.insertUser(name, email, password)
