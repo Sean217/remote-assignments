@@ -20,7 +20,7 @@ let db = {};
 db.insertUser = (name, email, password) => {
     console.log('start insert user.');
     return new Promise((resolve, reject) => {
-        pool.query('INSERT INTO USER (name, email, password) VALUES (?, ?, ?);', [name, email, password], (error, result) => {
+        pool.query('INSERT INTO user (name, email, password) VALUES (?, ?, ?);', [name, email, password], (error, result) => {
             if(error) {
                 console.log(error);
                 return reject(error);
@@ -53,7 +53,7 @@ db.getUserByEmail = (email) => {
 db.getUser = (id) => {
     console.log('start get user by id.');
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM User Where id = ?', [id], (error, user) => {
+        pool.query('SELECT * FROM user Where id = ?', [id], (error, user) => {
             if (error){
                 return reject(error);
             } 
