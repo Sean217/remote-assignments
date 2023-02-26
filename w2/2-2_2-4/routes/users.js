@@ -63,32 +63,26 @@ router.post('/', async (req, res, _next) => {
         const Request_Date = req.headers["request-date"];
         const { name, email, password } = req.body;
         //check for name validation
-        console.log(name, email, password);
         let nameValid = onlyLettersAndNumbers(name);
         if (!nameValid) {
             return res.status(400).send({ error: 'Client Error Response' })
         }
-        console.log('?');
         //check for email validation
         let valid = isEmailValid(email)
         if (!valid) {
             return res.status(400).send({ error: 'Client Error Response' })
         }
-        console.log('??');
         //check for email duplication
         let dup = await db.getUserByEmail(email);
-        console.log(dup);
         if (dup) {
             return res.status(403).send({ error: 'Email Already Exists' })
         }
-        console.log('???');
         //check for password validation
         let pwValid = await validatePassword(password)
         //console.log(pwValid);
         if (pwValid === false) {
             return res.status(400).send({ error: 'Client Error Response' })
         }
-        console.log('????');
         //insert new uesr to the db
         console.log(name, email, password);
         const userId = await db.insertUser(name, email, password)
@@ -113,11 +107,8 @@ router.get('/', async (req, res, next) => {
     console.log('start get user API');
     try {
         const Request_Date = req.headers["request-date"];
-        console.log(Request_Date);
         const id = req.query.id;
-        console.log(id);
         const user = await db.getUser(id)
-        console.log(user);
         if(!user) {
             return res.status(403).send({ error: "User Not Existing" });
         }
