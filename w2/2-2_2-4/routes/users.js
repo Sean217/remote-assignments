@@ -63,6 +63,7 @@ router.post('/', async (req, res, _next) => {
         const Request_Date = req.headers["request-date"];
         const { name, email, password } = req.body;
         //check for name validation
+        console.log(name, email, password);
         let nameValid = onlyLettersAndNumbers(name);
         if (!nameValid) {
             return res.status(400).send({ error: 'Client Error Response' })
