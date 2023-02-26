@@ -9,7 +9,7 @@ function requestSync(url) {
     xhr.open('GET', url, false);
     xhr.send(null); // sending null means that no body content is needed for the GET request 
     if (xhr.status === 200) {
-        console.log(xhr.responseText);
+        //console.log(xhr.responseText);
     } 
     var endTime = performance.now()
     console.log(`function ${i} took ${endTime - startTime} milliseconds`)
