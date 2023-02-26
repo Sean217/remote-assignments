@@ -42,6 +42,7 @@ db.getUserByEmail = (email) => {
     return new Promise((resolve, reject) => {
         pool.query('SELECT * FROM User WHERE email = ?', [email], (error, users) => {
             if(error) {
+                console.log(error);
                 return reject(error);
             }
             return resolve(users[0]);
