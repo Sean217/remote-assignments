@@ -2,12 +2,17 @@ import mysql from 'mysql2';
 import dotenv from "dotenv-defaults";
 dotenv.config();
 
+let DB_HOST = 'database-1.c98vcolprmbe.ap-northeast-1.rds.amazonaws.com'
+let DB_USER = 'admin'
+let DB_PASS = 's02170217'
+let MYSQL_DB = 'assignment'
+
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.MYSQL_DB
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASS,
+  database: MYSQL_DB
 })
 
 let db = {};

@@ -48,6 +48,7 @@ function validatePassword(str) {
         pwValid += 1;
     }
 
+    //console.log(pwValid);
     if (pwValid >= 3) {
         return true;
     } else {
@@ -64,22 +65,24 @@ router.post('/', async (req, res, _next) => {
         //check for name validation
         let nameValid = onlyLettersAndNumbers(name);
         if (!nameValid) {
-            res.status(400).send({ error: 'Client Error Response' })
+            return res.status(400).send({ error: 'Client Error Response' })
         }
         //check for email validation
         let valid = isEmailValid(email)
         if (!valid) {
-            res.status(400).send({ error: 'Client Error Response' })
+            return res.status(400).send({ error: 'Client Error Response' })
         }
         //check for email duplication
         let dup = await db.getUserByEmail(email);
-        if (!dup) {
-            res.status(403).send({ error: 'Email Already Exists' })
+        console.log(dup);
+        if (dup) {
+            return res.status(403).send({ error: 'Email Already Exists' })
         }
         //check for password validation
-        let pwValid = validatePassword(password)
-        if (!pwValid) {
-            res.status(400).send({ error: 'Client Error Response' })
+        let pwValid = await validatePassword(password)
+        //console.log(pwValid);
+        if (pwValid === false) {
+            return res.status(400).send({ error: 'Client Error Response' })
         }
         //insert new uesr to the db
         console.log(name, email, password);
@@ -95,9 +98,9 @@ router.post('/', async (req, res, _next) => {
                 "date": Request_Date
               }
         }
-        res.status(200).send(newUser);
+        return res.status(200).send(newUser);
     } catch (error) {
-        res.status(503).send("response unsuccessfully");
+        return res.status(503).send("response unsuccessfully");
     }
 });
 
@@ -111,7 +114,7 @@ router.get('/', async (req, res, next) => {
         const user = await db.getUser(id)
         console.log(user);
         if(!user) {
-            res.status(403).send({ error: "User Not Existing" });
+            return res.status(403).send({ error: "User Not Existing" });
         }
         const data = {
             "data": {
@@ -123,9 +126,9 @@ router.get('/', async (req, res, next) => {
                 "date": Request_Date
               }
         }
-        res.status(200).send(data);
+        return res.status(200).send(data);
     } catch (error) {
-        res.status(400).send({ error: 'Client Error Response' });
+        return res.status(400).send({ error: 'Client Error Response' });
     }
 })
 

@@ -1,16 +1,19 @@
-import dotenv from "dotenv-defaults";
-dotenv.config();
 import express from 'express'
 import cors from 'cors'
 import healthRouter from './routes/healthcheck'
 import usersRouter from  './routes/users'
 import mysql from 'mysql2'
 
+let DB_HOST = 'database-1.c98vcolprmbe.ap-northeast-1.rds.amazonaws.com'
+let DB_USER = 'admin'
+let DB_PASS = 's02170217'
+let MYSQL_DB = 'assignment'
+
 let connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.MYSQL_DB
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASS,
+  database: MYSQL_DB
 });
 connection.connect(function(err) {
   if (err) {
@@ -21,7 +24,7 @@ connection.connect(function(err) {
 });
 
 var app = express();
-const port = process.env.APP_PORT || 3000
+const port = 3000
 
 app.use(express.urlencoded({ extended: false }));
 app.use(cors())
