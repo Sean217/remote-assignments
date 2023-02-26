@@ -40,7 +40,7 @@ db.insertUser = (name, email, password) => {
 db.getUserByEmail = (email) => {
     console.log('start check email dup');
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM User WHERE email = ?', [email], (error, users) => {
+        pool.query('SELECT * FROM user WHERE email = ?', [email], (error, users) => {
             if(error) {
                 console.log(error);
                 return reject(error);
