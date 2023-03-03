@@ -60,6 +60,7 @@ router.post('/', async (req, res, _next) => {
 
     console.log("start signup API");
     try {
+        console.log(req.headers);
         const Request_Date = req.headers["request-date"];
         const { name, email, password } = req.body;
         //check for name validation
