@@ -12,7 +12,7 @@ function App() {
     console.log(name, email, password);
     const date = Date()
     console.log(date);
-    axios.post(`${hostname}/users` ,{
+    axios.post(`${hostname}/api/users` ,{
       "name": name,
       "email": email,
       "password": password,
