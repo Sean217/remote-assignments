@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { toast } from "react-toastify";
 
-const hostname = 'http://localhost:3000'
+const hostname = 'http://46.51.243.131'
 function App() {
 
   const [info, setInfo] = useState('');
