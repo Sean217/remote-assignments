@@ -10,14 +10,14 @@ function App() {
 
   const handleSubmit = (name, email, password) => {
     console.log(name, email, password);
-    const date = Date()
+    let date = Date();
     console.log(date);
     axios.post(`${hostname}/api/users` ,{
       "name": name,
       "email": email,
       "password": password,
     }, {headers: {
-      "Request-Date": date
+      "Request-Date": date.toString()
     }})
   .then(res => {
     console.log(res);
